@@ -20,5 +20,5 @@ CREATE TABLE IF NOT EXISTS reviews (
   rating VARCHAR,
   createdat TIMESTAMP,
   content VARCHAR,
-  restaurantid INTEGER
+  movieid INTEGER
 );
