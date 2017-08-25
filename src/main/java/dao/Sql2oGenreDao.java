@@ -1,4 +1,5 @@
 package dao;
+import models.Genre;
 import models.Review;
 import models.Movie;
 import org.sql2o.Connection;
@@ -56,7 +57,7 @@ public class Sql2oGenreDao implements GenreDao  {
     }
 
     @Override
-    public void addGenreToRestaurant(Genre genre, Restaurant restaurant){
+    public void addGenreToMovie(Genre genre, Movie restaurant){
         String sql = "INSERT INTO movies_genres (restaurantid, genreid) VALUES (:restaurantId, :genreId)";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
@@ -69,22 +70,22 @@ public class Sql2oGenreDao implements GenreDao  {
     }
 
     @Override
-    public List<Restaurant> getAllRestaurantsForAGenre(int genreId) {
+    public List<Movie> getAllMoviesForAGenre(int genreId) {
 
-        ArrayList<Restaurant> movies = new ArrayList<>();
+        ArrayList<Movie> movies = new ArrayList<>();
 
         String joinQuery = "SELECT restaurantid FROM movies_genres WHERE genreid = :genreId";
 
         try (Connection con = sql2o.open()) {
-            List<Integer> allRestaurantIds = con.createQuery(joinQuery)
+            List<Integer> allMovieIds = con.createQuery(joinQuery)
                     .addParameter("genreId", genreId)
                     .executeAndFetch(Integer.class); //what is happening in the lines above?
-            for (Integer restaurantId : allRestaurantIds){
+            for (Integer restaurantId : allMovieIds){
                 String restaurantQuery = "SELECT * FROM movies WHERE id = :restaurantId";
                 movies.add(
                         con.createQuery(restaurantQuery)
                                 .addParameter("restaurantId", restaurantId)
-                                .executeAndFetchFirst(Restaurant.class));
+                                .executeAndFetchFirst(Movie.class));
             } //why are we doing a second sql query - set?
         } catch (Sql2oException ex){
             System.out.println(ex);
