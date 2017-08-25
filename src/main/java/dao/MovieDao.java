@@ -8,7 +8,7 @@ import java.util.List;
 public interface MovieDao {
     //create
     void add (Movie movie); //L
-    void addMovieToGenre(Movie movie, Genre foodtype); //D
+    void addMovieToGenre(Movie movie, Genre genre); //D
 
     //read
     List<Movie> getAll(); //A

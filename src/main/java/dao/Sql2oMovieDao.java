@@ -3,6 +3,7 @@ import models.Genre;
 import models.Movie;
 import models.Review;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class Sql2oMovieDao implements MovieDao {
     @Override
     public void deleteById(int id) {
         String sql = "DELETE from movies WHERE id = :id"; //raw sql
-        String deleteJoin = "DELETE from movies_foodtypes WHERE movieid = :movieId";
+        String deleteJoin = "DELETE from movies_genres WHERE movieid = :movieId";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
@@ -66,7 +67,7 @@ public class Sql2oMovieDao implements MovieDao {
 
     @Override
     public void update(int id, String newName, String newAddress, String newZipcode, String newPhone, String newWebsite, String newEmail, String newImage){
-        String sql = "UPDATE movies SET ( title, director,  releaseDate,  website,  image) = (:title, :director,  :releaseDate,  :website,  :image) WHERE id=:id"; //CHECK!!!
+        String sql = "UPDATE movies SET ( title, director,  releaseDate,  website,  image) = (:title, :director,  :releaseDate,  :website,  :image) WHERE id=:id";
 
         try(Connection con = sql2o.open()){
             con.createQuery(sql)
@@ -85,12 +86,12 @@ public class Sql2oMovieDao implements MovieDao {
     }
 
     @Override
-    public void addMovieToFoodtype(Movie movie, Foodtype foodtype){
-        String sql = "INSERT INTO movies_foodtypes (movieid, foodtypeid) VALUES (:movieId, :foodtypeId)";
+    public void addMovieToGenre(Movie movie, Genre genre){
+        String sql = "INSERT INTO movies_genres (movieid, genreid) VALUES (:movieId, :genreId)";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("movieId", movie.getId())
-                    .addParameter("foodtypeId", foodtype.getId())
+                    .addParameter("genreId", genre.getId())
                     .executeUpdate();
         } catch (Sql2oException ex){
             System.out.println(ex);
@@ -98,26 +99,26 @@ public class Sql2oMovieDao implements MovieDao {
     }
 
     @Override
-    public List<Foodtype> getAllFoodtypesForAMovie(int movieId) {
-        ArrayList<Foodtype> foodtypes = new ArrayList<>();
+    public List<Genre> getAllGenresForAMovie(int movieId) {
+        ArrayList<Genre> genres = new ArrayList<>();
 
-        String joinQuery = "SELECT foodtypeid FROM movies_foodtypes WHERE movieid = :movieId";
+        String joinQuery = "SELECT genreid FROM movies_genres WHERE movieid = :movieId";
 
         try (Connection con = sql2o.open()) {
-            List<Integer> allFoodtypesIds = con.createQuery(joinQuery)
+            List<Integer> allGenresIds = con.createQuery(joinQuery)
                     .addParameter("movieId", movieId)
                     .executeAndFetch(Integer.class);
-            for (Integer foodId : allFoodtypesIds){
-                String foodtypeQuery = "SELECT * FROM foodtypes WHERE id = :foodtypeId";
-                foodtypes.add(
-                        con.createQuery(foodtypeQuery)
-                                .addParameter("foodtypeId", foodId)
-                                .executeAndFetchFirst(Foodtype.class));
+            for (Integer genreId : allGenresIds){
+                String genreQuery = "SELECT * FROM genres WHERE id = :genreId";
+                genres.add(
+                        con.createQuery(genreQuery)
+                                .addParameter("genreId", genreId)
+                                .executeAndFetchFirst(Genre.class));
             }
         } catch (Sql2oException ex){
             System.out.println(ex);
         }
-        return foodtypes;
+        return genres;
     }
 
 

@@ -57,11 +57,11 @@ public class Sql2oGenreDao implements GenreDao  {
     }
 
     @Override
-    public void addGenreToMovie(Genre genre, Movie restaurant){
-        String sql = "INSERT INTO movies_genres (restaurantid, genreid) VALUES (:restaurantId, :genreId)";
+    public void addGenreToMovie(Genre genre, Movie movie){
+        String sql = "INSERT INTO movies_genres (movieid, genreid) VALUES (:movieId, :genreId)";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
-                    .addParameter("restaurantId", restaurant.getId())
+                    .addParameter("movieId", movie.getId())
                     .addParameter("genreId", genre.getId())
                     .executeUpdate();
         } catch (Sql2oException ex){
@@ -74,17 +74,17 @@ public class Sql2oGenreDao implements GenreDao  {
 
         ArrayList<Movie> movies = new ArrayList<>();
 
-        String joinQuery = "SELECT restaurantid FROM movies_genres WHERE genreid = :genreId";
+        String joinQuery = "SELECT movieid FROM movies_genres WHERE genreid = :genreId";
 
         try (Connection con = sql2o.open()) {
             List<Integer> allMovieIds = con.createQuery(joinQuery)
                     .addParameter("genreId", genreId)
                     .executeAndFetch(Integer.class); //what is happening in the lines above?
-            for (Integer restaurantId : allMovieIds){
-                String restaurantQuery = "SELECT * FROM movies WHERE id = :restaurantId";
+            for (Integer movieId : allMovieIds){
+                String movieQuery = "SELECT * FROM movies WHERE id = :movieId";
                 movies.add(
-                        con.createQuery(restaurantQuery)
-                                .addParameter("restaurantId", restaurantId)
+                        con.createQuery(movieQuery)
+                                .addParameter("movieId", movieId)
                                 .executeAndFetchFirst(Movie.class));
             } //why are we doing a second sql query - set?
         } catch (Sql2oException ex){
