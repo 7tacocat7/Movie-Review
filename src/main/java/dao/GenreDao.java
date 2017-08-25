@@ -12,7 +12,7 @@ public interface GenreDao {
     void addGenreToMovie(Genre genre, Movie movie);
 
     //read
-    List<Genre> getAll();  it should be implemented.
+    List<Genre> getAll();
     List<Movie> getAllMoviesForAGenre(int id);
 
     //update
@@ -21,4 +21,4 @@ public interface GenreDao {
     //delete
     void deleteById(int id);
 }
-}
+

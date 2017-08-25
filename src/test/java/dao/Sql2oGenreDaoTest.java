@@ -1,12 +1,40 @@
 package dao;
 
+
+
 import models.Genre;
 import models.Movie;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class Sql2oGenreDaoTest {
+    private Sql2oGenreDao genreDao;
+    private Sql2oMovieDao movieDao;
+    private Connection conn;
+
+    @Before
+    public void setUp() throws Exception {
+        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
+        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        movieDao = new Sql2oMovieDao(sql2o);
+        genreDao = new Sql2oGenreDao(sql2o);
+        conn = sql2o.open();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        conn.close();
+    }
+
     @Test
     public void add() throws Exception {
     }
@@ -38,32 +66,38 @@ public class Sql2oGenreDaoTest {
     }
     @Test
     public void deleteingMovieAlsoUpdatesJoinTable() throws Exception {
-        Genre testGenre  = new Genre("Seafood");
-        genreDao.restaurant
-restaurant
-restaurant
-restaurant
-restaurant
-restaurant
-restaurantadd(testGenre);
 
         Movie testMovie = setupMovie();
+
         movieDao.add(testMovie);
 
-        Movie altMovie = setupAltMovie();
-        movieDao.add(altMovie);
+        Genre testGenre = setupNewGenre();
+        Genre otherFoodType = new Genre("Japanese");
 
-        movieDao.addMovieToGenre(testMovie,testGenre);
-        movieDao.addMovieToGenre(altMovie, testGenre);
+        genreDao.add(testGenre);
+        genreDao.add(otherFoodType);
 
-        movieDao.deleteById(testMovie.getId());
-        assertEquals(0, movieDao.getAllGenresForAMovie(testMovie.getId()).size());
+        genreDao.addGenreToMovie(testGenre, testMovie);
+        genreDao.addGenreToMovie(otherFoodType,testMovie);
+
+        genreDao.deleteById(testMovie.getId());
+        assertEquals(0, genreDao.getAllMoviesForAGenre(testGenre.getId()).size());
+
     }
 
 
     @Test
     public void getAllMoviesForAGenre() throws Exception {
     }
+
+    public Genre setupNewGenre() {
+        return new Genre("Action");
+    }
+
+    public Genre setupAltGenre() {
+        return new Genre("Comedy");
+    }
+
 
      public Movie setupMovie(){
         return new Movie("the dark knight", "chrisopher noland","02/03/2012","www.coolmoviestuff.com","/resources/image/uploads/movie_image.jpg");

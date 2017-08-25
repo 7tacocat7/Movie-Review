@@ -22,4 +22,4 @@ public interface MovieDao {
     //delete
     void deleteById(int id); //M
 }
-}
+

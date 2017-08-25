@@ -1,6 +1,7 @@
 package dao;
 
-import models.Review;package dao;
+import models.Review;
+
 
 import models.Genre;
 import models.Movie;
@@ -21,7 +22,7 @@ public class Sql2oReviewDao implements ReviewDao {
     @Override
     public void add(Review review) {
 
-        String sql = "INSERT INTO reviews (writtenby, rating, createdat, content, restaurantid ) VALUES (:writtenBy, :rating, :createdAt, :content, :restaurantId )";
+        String sql = "INSERT INTO reviews (writtenby, rating, createdat, content, movieid ) VALUES (:writtenBy, :rating, :createdAt, :content, :movieId )";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql)
                     .bind(review)
@@ -46,10 +47,10 @@ public class Sql2oReviewDao implements ReviewDao {
     }
 
     @Override
-    public List<Review> getAllReviewsByRestaurant(int restaurantId) {
+    public List<Review> getAllReviewsByRestaurant(int movieId) {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM reviews WHERE restaurantId = :restaurantId")
-                    .addParameter("restaurantId", restaurantId)
+            return con.createQuery("SELECT * FROM reviews WHERE movieId = :movieId")
+                    .addParameter("movieId", movieId)
                     .executeAndFetch(Review.class);
         }
     }
