@@ -46,7 +46,7 @@ public class Review {
         return content;
     }
 
-    public int getRestaurantId() {
+    public int getMovieId() {
         return restaurantId;
     }
 
@@ -73,7 +73,7 @@ public class Review {
         this.content = content;
     }
 
-    public void setRestaurantId(int restaurantId) {
+    public void setMovieId(int restaurantId) {
         this.restaurantId = restaurantId;
     }
 }

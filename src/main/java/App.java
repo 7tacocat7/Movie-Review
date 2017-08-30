@@ -3,6 +3,7 @@ import com.google.gson.Gson;
 import dao.Sql2oGenreDao;
 import dao.Sql2oMovieDao;
 import models.Movie;
+import models.Review;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import static spark.Spark.*;
@@ -30,6 +31,15 @@ public class App {
             res.status(201);
             res.type("application/json");
             return gson.toJson(movie);
+        });
+
+        post("/movies/:movieId/reviews/new", "application/json", (req, res) ->{
+            int movieId = Integer.parseInt(req.params("movieId"));
+            Review review = gson.fromJson(req.body(), Review.class);
+            review.setMovieId((movieId));
+            reviewDao.add(review);
+            res.status(201);
+            return gson.toJson((review);
         });
         //read
         get("/movies", "application/json", (req, res) ->{
