@@ -80,9 +80,7 @@ public class Sql2oMovieDaoTest {
     public Movie setupMovie(){
         return new Movie("Jaws", "Steven Spielberg", "June 20, 1975");
     }
-    public Movie setupAltMovie
-
-    {
+    public Movie setupAltMovie(){
         return new Movie("Halloween", "John Carpenter", "October 25, 1978", "http://halloweenmovies.com", "/resources/images/uploads/Boo.jpg");
     }
 

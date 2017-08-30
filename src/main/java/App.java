@@ -31,7 +31,7 @@ public class App {
             res.type("application/json");
             return gson.toJson(movie);
         });
-        get("/movies/new", "application/json", (req, res) ->{
+        get("/movies", "application/json", (req, res) ->{
             res.type("application/json");
             return gson.toJson(movieDao.getAll());
         });

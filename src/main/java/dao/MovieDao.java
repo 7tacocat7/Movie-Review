@@ -16,10 +16,10 @@ public interface MovieDao {
 
     Movie findById(int id); //B
 
-    //update
-    void update(String title, String director, String releaseDate, String website, String image); //N
-
-    //delete
-    void deleteById(int id); //M
+//    //update
+//    void update(String title, String director, String releaseDate, String website, String image); //N
+//
+//    //delete
+//    void deleteById(int id); //M
 }
 

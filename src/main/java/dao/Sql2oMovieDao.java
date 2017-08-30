@@ -42,7 +42,7 @@ public class Sql2oMovieDao implements MovieDao {
         }
     }
 
-    @Override
+//    @Override
     public void deleteById(int id) {
         String sql = "DELETE from movies WHERE id = :id"; //raw sql
         String deleteJoin = "DELETE from movies_genres WHERE movieid = :movieId";
@@ -68,20 +68,17 @@ public class Sql2oMovieDao implements MovieDao {
         }
     }
 
-    @Override
-    public void update(int id, String newName, String newAddress, String newZipcode, String newPhone, String newWebsite, String newEmail, String newImage){
+//    @Override
+    public void update(String newTitle, String newDirector, String newReleaseDate, String newWebsite, String newImage{
         String sql = "UPDATE movies SET ( title, director,  releaseDate,  website,  image) = (:title, :director,  :releaseDate,  :website,  :image) WHERE id=:id";
 
         try(Connection con = sql2o.open()){
             con.createQuery(sql)
-                    .addParameter("name", newName)
-                    .addParameter("address", newAddress)
-                    .addParameter("zipcode", newZipcode)
-                    .addParameter("phone", newPhone)
+                    .addParameter("title", newTitle)
+                    .addParameter("director", newDirector)
+                    .addParameter("releaseDate", newReleaseDate)
                     .addParameter("website", newWebsite)
-                    .addParameter("email", newEmail)
                     .addParameter("image", newImage)
-                    .addParameter("id", id)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);
