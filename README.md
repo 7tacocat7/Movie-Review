@@ -10,7 +10,12 @@ _Allows users to browse and rate movies based on title and genre. Users may leav
 * Spark
 * Postman
 * Handlebars
-* rotten tomatoes API
+![alt text](https://raw.githubusercontent.com/7tacocat7/Movie-Review/master/screenshots/screenShot1
+![alt text](https://raw.githubusercontent.com/7tacocat7/Movie-Review/master/screenshots/screenShot2
+![alt text](https://raw.githubusercontent.com/7tacocat7/Movie-Review/master/screenshots/screenShot3
+![alt text](https://raw.githubusercontent.com/7tacocat7/Movie-Review/master/screenshots/screenShot4
+![alt text](https://raw.githubusercontent.com/7tacocat7/Movie-Review/master/screenshots/screenShot5
+![alt text](https://raw.githubusercontent.com/7tacocat7/Movie-Review/master/screenshots/screenShot6
 
 ## Development Specifications
 | Behavior      | Example Input         | Example Output        |
