@@ -17,10 +17,7 @@ _Allows users to browse and rate movies based on title and genre. Users may leav
 ![alt text](https://raw.githubusercontent.com/7tacocat7/Movie-Review/master/screenshots/screenShot5.png)
 ![alt text](https://raw.githubusercontent.com/7tacocat7/Movie-Review/master/screenshots/screenShot6.png)
 
-## Development Specifications
-| Behavior      | Example Input         | Example Output        |
-| ------------- | ------------- | ------------- |
-| Add a new team  | Team name and description  |  Team name, description on webpage  |
+
 
 
 ## Setup/Installation Requirements
