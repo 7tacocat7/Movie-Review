@@ -22,7 +22,7 @@ public class Sql2oMovieDao implements MovieDao {
 
     @Override
     public void add(Movie movie) {
-        String sql = "INSERT INTO movies (name, address, zipcode, phone, website, email, image) VALUES (:name, :address, :zipcode, :phone, :website, :email, :image)";
+        String sql = "INSERT INTO movies (title, director, releaseDate, website, image) VALUES (:title, :director, :releaseDate, :website, :image)";
         try(Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql)
                     .bind(movie)
@@ -69,7 +69,7 @@ public class Sql2oMovieDao implements MovieDao {
     }
 
 //    @Override
-    public void update(String newTitle, String newDirector, String newReleaseDate, String newWebsite, String newImage{
+    public void update(String newTitle, String newDirector, String newReleaseDate, String newWebsite, String newImage){
         String sql = "UPDATE movies SET ( title, director,  releaseDate,  website,  image) = (:title, :director,  :releaseDate,  :website,  :image) WHERE id=:id";
 
         try(Connection con = sql2o.open()){

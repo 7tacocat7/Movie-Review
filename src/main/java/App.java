@@ -23,7 +23,7 @@ public class App {
         reviewDao = new Sql2oReviewDao(sql2o);
         conn = sql2o.open();
 
-
+        //create
         post("/movies/new", "application/json", (req, res) -> {
             Movie movie = gson.fromJson(req.body(), Movie.class);
             movieDao.add(movie);
@@ -31,6 +31,7 @@ public class App {
             res.type("application/json");
             return gson.toJson(movie);
         });
+        //read
         get("/movies", "application/json", (req, res) ->{
             res.type("application/json");
             return gson.toJson(movieDao.getAll());
@@ -40,6 +41,11 @@ public class App {
             int movieId =Integer.parseInt(req.params("id"));
             res.type("application/json");
             return gson.toJson(movieDao.findById(movieId));
+        });
+
+        //Filters
+        after((req, res)-> {
+            res.type("application/json");
         });
 
     }

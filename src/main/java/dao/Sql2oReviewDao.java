@@ -47,7 +47,7 @@ public class Sql2oReviewDao implements ReviewDao {
     }
 
     @Override
-    public List<Review> getAllReviewsByRestaurant(int movieId) {
+    public List<Review> getAllReviewsByMovie(int movieId) {
         try (Connection con = sql2o.open()) {
             return con.createQuery("SELECT * FROM reviews WHERE movieId = :movieId")
                     .addParameter("movieId", movieId)
