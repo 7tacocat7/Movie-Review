@@ -57,18 +57,7 @@ public class Sql2oMovieDaoTest {
     public void update() throws Exception {
     }
 
-    @Test
-    public void addMovieToGenre() throws Exception {
-        String sql = "INSERT INTO movies_genres (movieid, genreid) VALUES (:movieId, :genreId)";
-        try (Connection con = sql2o.open()) {
-            con.createQuery(sql)
-                    .addParameter("movieId", movie.getId())
-                    .addParameter("genreId", genre.getId())
-                    .executeUpdate();
-        } catch (Sql2oException ex){
-            System.out.println(ex);
-        }
-    }
+
 
     @Test
     public void getAllGenresForAMovie() throws Exception {
@@ -86,6 +75,15 @@ public class Sql2oMovieDaoTest {
         Genre[] genres = {testGenre, otherGenre}; //oh hi what is this?
 
         assertEquals(movieDao.getAllGenresForAMovie(testMovie.getId()), Arrays.asList(genres));
+    }
+
+    public Movie setupMovie(){
+        return new Movie("Jaws", "Steven Spielberg", "June 20, 1975");
+    }
+    public Movie setupAltMovie
+
+    {
+        return new Movie("Halloween", "John Carpenter", "October 25, 1978", "http://halloweenmovies.com", "/resources/images/uploads/Boo.jpg");
     }
 
 }
