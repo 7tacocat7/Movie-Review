@@ -39,6 +39,9 @@ public class Sql2oMovieDaoTest {
 
     @Test
     public void add() throws Exception {
+        Movie movie = setupMovie();
+        movieDao.add(movie);
+        assertEquals(movieDao.getAll().size(),1);
 
     }
 
