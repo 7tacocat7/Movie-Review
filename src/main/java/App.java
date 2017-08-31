@@ -2,10 +2,15 @@ package dao;
 import com.google.gson.Gson;
 import dao.Sql2oGenreDao;
 import dao.Sql2oMovieDao;
+import exceptions.ApiException;
 import models.Movie;
 import models.Review;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import static spark.Spark.*;
 
 public class App {
@@ -35,22 +40,43 @@ public class App {
 
         post("/movies/:movieId/reviews/new", "application/json", (req, res) ->{
             int movieId = Integer.parseInt(req.params("movieId"));
+
             Review review = gson.fromJson(req.body(), Review.class);
+
             review.setMovieId((movieId));
             reviewDao.add(review);
             res.status(201);
-            return gson.toJson((review);
+            return gson.toJson((review));
         });
         //read
         get("/movies", "application/json", (req, res) ->{
             res.type("application/json");
             return gson.toJson(movieDao.getAll());
         });
+        get("/movies/:id", "application/json", (req, res) -> {
+            int movieId = Integer.parseInt(req.params("id"));
+            Movie movieToFind = movieDao.findById(movieId);
+            if (movieToFind == null) {
+                throw new ApiException(404, String.format("No movie with the id: \"%s\" exists", req.params("id")));
+            }
+            return gson.toJson(movieToFind);
+        });
+
         get("/movies/:id", "application/json", (req, res)-> {
             res.type("application/json");
             int movieId =Integer.parseInt(req.params("id"));
             res.type("application/json");
             return gson.toJson(movieDao.findById(movieId));
+        });
+
+        exception(ApiException.class, (exc, req, res) -> {
+            ApiException err = (ApiException) exc;
+            Map<String, Object> jsonMap = new HashMap<>();
+            jsonMap.put("status", err.getStatusCode());
+            jsonMap.put("errorMessage", err.getMessage());
+            res.type("application/json");
+            res.status(err.getStatusCode());
+            res.body(gson.toJson(jsonMap));
         });
 
         //Filters

@@ -6,6 +6,8 @@ public class Genre {
     private String name;
     private int id;
 
+
+
     public Genre(String name) {
         this.name = name;
     }
