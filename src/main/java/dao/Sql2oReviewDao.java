@@ -54,6 +54,13 @@ public class Sql2oReviewDao implements ReviewDao {
                     .executeAndFetch(Review.class);
         }
     }
+    @Override
+    public List<Review> getAll() {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM reviews")
+                    .executeAndFetch(Review.class);
+        }
+    }
 
 
 }

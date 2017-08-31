@@ -32,6 +32,9 @@ public class Sql2oReviewDaoTest {
     }
     @Test
     public void add() throws Exception {
+        Review review = setupReview();
+        reviewDao.add(review);
+        assertEquals(reviewDao.getAll().size(),1);
     }
 
 
@@ -68,6 +71,10 @@ public class Sql2oReviewDaoTest {
 
     public Movie setupMovie() {
         return new Movie("the dark knight", "chrisopher noland", "02/03/2012", "www.coolmoviestuff.com", "/resources/image/uploads/movie_image.jpg");
+    }
+    public Review setupReview(){
+        return  new Review("carson", 2,"this movie is garbage",7);
+
     }
 
 }

@@ -12,6 +12,7 @@ public interface ReviewDao {
 
     //read
     List<Review> getAllReviewsByMovie(int restaurantId);
+    List<Review>getAll();
 
     //update
     //omit for now

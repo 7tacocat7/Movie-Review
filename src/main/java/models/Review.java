@@ -12,14 +12,14 @@ public class Review {
     private int rating;
     private Timestamp createdAt;
     private String content;
-    private int restaurantId;
+    private int movieId;
 
-    public Review(String writtenBy, int rating, String content, int restaurantId) {
+    public Review(String writtenBy, int rating, String content, int movieId) {
         this.writtenBy = writtenBy;
         this.rating = rating;
         this.createdAt = Timestamp.valueOf(LocalDateTime.now());
         this.content = content;
-        this.restaurantId = restaurantId;
+        this.movieId = movieId;
     }
 //getters
 
@@ -47,7 +47,7 @@ public class Review {
     }
 
     public int getMovieId() {
-        return restaurantId;
+        return movieId;
     }
 
     //setters
@@ -73,8 +73,8 @@ public class Review {
         this.content = content;
     }
 
-    public void setMovieId(int restaurantId) {
-        this.restaurantId = restaurantId;
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
     }
 }
 
