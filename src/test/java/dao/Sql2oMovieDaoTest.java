@@ -59,6 +59,17 @@ public class Sql2oMovieDaoTest {
 
     @Test
     public void deleteById() throws Exception {
+        Movie movie1 = setupAltMovie();
+        movie1.setId(1);
+        Movie movie2 = setupMovie();
+        movie2.setId(2);
+        Movie movie3 = setupAltMovie();
+        movie3.setId(47);
+        movieDao.add(movie1);
+        movieDao.add(movie2);
+        movieDao.add(movie3);
+        movieDao.deleteById(3);
+        assertEquals(2, movieDao.getAll().size());
     }
 
     @Test
