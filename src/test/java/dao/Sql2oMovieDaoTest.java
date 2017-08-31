@@ -39,6 +39,7 @@ public class Sql2oMovieDaoTest {
 
     @Test
     public void add() throws Exception {
+
     }
 
     @Test
