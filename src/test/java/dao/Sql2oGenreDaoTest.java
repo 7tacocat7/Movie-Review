@@ -37,6 +37,9 @@ public class Sql2oGenreDaoTest {
 
     @Test
     public void add() throws Exception {
+        Genre genre = setupNewGenre();
+        genreDao.add(genre);
+        assertEquals(genreDao.getAll().size(), 1);
     }
 
     @Test
@@ -104,6 +107,9 @@ public class Sql2oGenreDaoTest {
     }
     public Movie setupAltMovie(){
          return new Movie ("the clown","travis kniht","04/09/2003");
+    }
+    public Genre setupGenre(){
+        return  new Genre("comedy");
     }
 
 }
