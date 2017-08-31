@@ -44,6 +44,13 @@ public class Sql2oGenreDaoTest {
 
     @Test
     public void getAll() throws Exception {
+        Genre genre = setupNewGenre();
+        Genre genre1 = setupNewGenre();
+        Genre genre2 = setupNewGenre();
+        genreDao.add(genre);
+        genreDao.add(genre1);
+        genreDao.add(genre2);
+        assertEquals(genreDao.getAll().size(), 3);
 
     }
 
