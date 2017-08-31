@@ -44,6 +44,7 @@ public class Sql2oGenreDaoTest {
 
     @Test
     public void getAll() throws Exception {
+
     }
 
     @Test
