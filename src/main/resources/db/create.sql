@@ -25,6 +25,6 @@ CREATE TABLE IF NOT EXISTS reviews (
 
 CREATE TABLE IF NOT EXISTS movies_genres (
  id int PRIMARY KEY auto_increment,
- movietId INTEGER,
+ movieId INTEGER,
  genreId INTEGER
 );

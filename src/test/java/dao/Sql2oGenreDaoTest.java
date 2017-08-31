@@ -83,13 +83,13 @@ public class Sql2oGenreDaoTest {
         movieDao.add(testMovie);
 
         Genre testGenre = setupNewGenre();
-        Genre otherFoodType = new Genre("Japanese");
+        Genre otherGenreType = new Genre("Japanese");
 
         genreDao.add(testGenre);
-        genreDao.add(otherFoodType);
+        genreDao.add(otherGenreType);
 
         genreDao.addGenreToMovie(testGenre, testMovie);
-        genreDao.addGenreToMovie(otherFoodType,testMovie);
+        genreDao.addGenreToMovie(otherGenreType,testMovie);
 
         genreDao.deleteById(testMovie.getId());
         assertEquals(0, genreDao.getAllMoviesForAGenre(testGenre.getId()).size());

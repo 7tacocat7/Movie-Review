@@ -45,7 +45,7 @@ public class Sql2oMovieDao implements MovieDao {
 //    @Override
     public void deleteById(int id) {
         String sql = "DELETE from movies WHERE id = :id"; //raw sql
-        String deleteJoin = "DELETE from movies_genres WHERE movieid = :movieId";
+        String deleteJoin = "DELETE from movies_genres WHERE movieId = :movieId";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
@@ -87,7 +87,7 @@ public class Sql2oMovieDao implements MovieDao {
 
     @Override
     public void addMovieToGenre(Movie movie, Genre genre){
-        String sql = "INSERT INTO movies_genres (movieid, genreid) VALUES (:movieId, :genreId)";
+        String sql = "INSERT INTO movies_genres (movieId, genreId) VALUES (:movieId, :genreId)";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("movieId", movie.getId())
@@ -102,7 +102,7 @@ public class Sql2oMovieDao implements MovieDao {
     public List<Genre> getAllGenresForAMovie(int movieId) {
         ArrayList<Genre> genres = new ArrayList<>();
 
-        String joinQuery = "SELECT genreid FROM movies_genres WHERE movieid = :movieId";
+        String joinQuery = "SELECT genreId FROM movies_genres WHERE movieId = :movieId";
 
         try (Connection con = sql2o.open()) {
             List<Integer> allGenresIds = con.createQuery(joinQuery)

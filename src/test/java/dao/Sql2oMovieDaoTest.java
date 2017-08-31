@@ -84,10 +84,10 @@ public class Sql2oMovieDaoTest {
 
     @Test
     public void getAllGenresForAMovie() throws Exception {
-        Genre testGenre  = new Genre("Seafood");
+        Genre testGenre  = new Genre("comedy");
         genreDao.add(testGenre);
 
-        Genre otherGenre  = new Genre("Bar Food");
+        Genre otherGenre  = new Genre("scifi");
         genreDao.add(otherGenre);
 
         Movie testMovie = setupMovie();
