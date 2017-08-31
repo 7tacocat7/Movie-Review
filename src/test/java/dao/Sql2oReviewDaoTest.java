@@ -52,6 +52,14 @@ public class Sql2oReviewDaoTest {
 
     @Test
     public void deleteById() throws Exception {
+        Review review = setupReview();
+        Review review2 = setupReview();
+        review.setId(1);
+        reviewDao.add(review);
+        reviewDao.add(review2);
+        reviewDao.deleteById(1);
+        assertEquals(reviewDao.getAll().size(),1);
+
     }
 
     @Test
