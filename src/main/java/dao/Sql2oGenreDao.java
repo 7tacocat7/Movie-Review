@@ -92,6 +92,14 @@ public class Sql2oGenreDao implements GenreDao  {
         }
         return movies;
     }
+    @Override
+    public Genre findById(int id) {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM genres WHERE id = :id")
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Genre.class);
+        }
+    }
 
 
 }

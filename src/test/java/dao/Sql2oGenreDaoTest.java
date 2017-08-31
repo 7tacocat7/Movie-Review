@@ -56,6 +56,15 @@ public class Sql2oGenreDaoTest {
 
     @Test
     public void deleteById() throws Exception {
+        Genre genre =setupNewGenre();
+        Genre genre1 = setupAltGenre();
+        genreDao.add(genre);
+        genreDao.add(genre1);
+        genreDao.deleteById(genre.getId());
+
+        assertEquals(1, genreDao.getAll().size());
+        assertEquals(genre1,genreDao.findById(genre1.getId()));
+        assertNotEquals(genre,genreDao.findById(genre.getId()));
     }
 
     @Test
